@@ -1,0 +1,22 @@
+@(games: List[Game], players: List[Player])
+
+@main("Beauty Contest") {
+
+<header>
+    <hgroup>
+        <h1>Dashboard</h1>
+        <h2>Games</h2>
+    </hgroup>
+</header>
+
+<article  class="tasks">
+    <ul class="list">
+        @games.map { game =>
+        @views.html.games.item(game)
+        }
+    </ul>
+
+</article>
+
+}
+

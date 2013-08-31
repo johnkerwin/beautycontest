@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1173730971">
+    <data-source source="LOCAL" name="beautycontest" product="H2" version="1.3.170 (2012-11-30)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.3.170 (2012-11-30)" uuid="dd581755-28ea-4480-8c76-adae52bcb1e6">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:mem:myplay</jdbc-url>
+      <schema-pattern>*</schema-pattern>
+      <libraries>
+        <library>
+          <url>jar://$PROJECT_DIR$/lib/h2-1.3.170.jar!/</url>
+        </library>
+        <library>
+          <url>file://$PROJECT_DIR$/lib/h2-license.txt</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
+
