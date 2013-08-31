@@ -1,0 +1,4 @@
+beautycontest
+=============
+
+Keynesian Beauty Contest
