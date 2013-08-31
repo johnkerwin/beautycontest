@@ -7,27 +7,31 @@
 </header>
 
 <div>Pick a Nickname:</div>
-<div><input type="text"/></div>
+<div><input type="text" value="xxx"/></div>
 <div><button name="button" id="button" value="button" type="button">Click Me!</button></div>
 <div id="result"> </div>
 
+<form action="getdata" method="post">
+    Name: <input name="name" type="text" size="25" value="XXX" />
+
+    <input name="mySubmit" type="submit" value="submit" />
+</form>
+
 <script>
-    $("#button").click(function(){
-        $.post("/getdata",
-                {testme: "a"},
-                function(data){
-                    $('#result').html(data);
-                });
-    });
+
     $("#button").click(function(){
     $.ajax({
-        url:url,
+        url:"/getdata",
         type:"POST",
-        data:data,
-        contentType:"application/json; charset=utf-8",
+        data: {"name": "Guillaume"},
+        //contentType:"application/json",
         dataType:"json",
-        success: function(){
-            ...
+        success: function(data){
+            mytext = $('#result').html();
+            $('#result').html(data.message + '<BR/>' +mytext);
+        }   ,
+        failure: function(){
+            $('#result').html("whoops");
         }
     })
     });

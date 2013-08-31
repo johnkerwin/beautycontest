@@ -3,6 +3,14 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import models.Game;
 import models.Player;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.node.ObjectNode;
+import play.api.libs.json.JsPath;
+import play.data.DynamicForm;
+
+import play.data.Form;
+import play.libs.Json;
+import play.mvc.BodyParser;
 import play.*;
 import play.mvc.*;
 import views.html.*;
@@ -18,6 +26,24 @@ public class Application extends Controller {
         return ok(register.render("hi"));
 
        // return ok(myregister.render("Please Register"));
+    }
+
+   // @BodyParser.Of(BodyParser.Json.class)
+    public static Result getdata() {
+        //JsonNode json = request().body().asJson();
+        DynamicForm data = Form.form().bindFromRequest();
+        ObjectNode result = Json.newObject();
+        String name = data.get("name");
+
+//        if(json == null){
+//            return ok("ho there");
+//         //return badRequest("empty json"); // PROBLEM: THE JSON IS ALWAYS NULL
+//        }
+        response.setCookie("playlonglivecookie", yourData, "14d");
+
+        result.put("status", "OK");
+        result.put("message", name);
+        return ok(result);
     }
 
 
