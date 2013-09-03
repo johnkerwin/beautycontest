@@ -13,10 +13,9 @@ create table game (
 
 create table guess (
   id                        bigint not null,
-  name                      varchar(255),
+  value                     integer,
   game_id                   bigint,
   player_id                 bigint,
-  done                      boolean,
   due_date                  timestamp,
   constraint uq_guess_1 unique (game_id,player_id),
   constraint pk_guess primary key (id))

@@ -2,6 +2,7 @@ package controllers;
 
 import com.avaje.ebean.Ebean;
 import models.Game;
+import models.Guess;
 import models.Player;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.node.ObjectNode;
@@ -9,6 +10,7 @@ import play.api.libs.json.JsPath;
 import play.data.DynamicForm;
 
 import play.data.Form;
+import play.libs.Crypto;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.*;
@@ -22,8 +24,35 @@ public class Application extends Controller {
 
 
 
+    public static Result guess(){
+
+        //Game game = new Game();
+        Game currentGame = Game.getCurrentGame();
+        Long id = 1L;
+        Player currentPlayer = Player.find.byId(id);
+        Guess guess = new Guess();
+        guess.game = currentGame;
+        guess.value = 12;
+        guess.player = currentPlayer;
+
+        return ok("ok");
+    }
     public static Result register(){
-        return ok(register.render("hi"));
+
+        String user = session("connected");
+        String remote = request().remoteAddress();
+        String username = "test";
+
+        response().setCookie("rememberme", Crypto.sign(username) + "-" + username +  '-' + remote, 604800000);
+
+
+        if (user == null){
+            user = "Wow";
+        }
+        session("connected", "user@gmail.com");
+        return ok(user + '-' + remote );
+
+
 
        // return ok(myregister.render("Please Register"));
     }
@@ -39,7 +68,7 @@ public class Application extends Controller {
 //            return ok("ho there");
 //         //return badRequest("empty json"); // PROBLEM: THE JSON IS ALWAYS NULL
 //        }
-        response.setCookie("playlonglivecookie", yourData, "14d");
+  //      response.setCookie("playlonglivecookie", yourData, "14d");
 
         result.put("status", "OK");
         result.put("message", name);
@@ -59,19 +88,19 @@ public class Application extends Controller {
         //return ok(game.render("hi"));
     }
     public static Result index() {
-        //Game game = new Game();
+        Game game = new Game();
 
-        Game game = Ebean.find(Game.class, 1);
-
-
-        // game.name = "test"  ;
-        // game.save();
-        if (game != null) {
-            Ebean.delete(game);
-        }
+        //Game game = Ebean.find(Game.class, 1);
 
 
-        //return ok(index.render("Your new application is ready."));
+         game.name = "test1"  ;
+         game.save();
+//        if (game != null) {
+//            Ebean.delete(game);
+//        }
+
+         // return ok("ok");
+       // return ok(index.render("Your new application is ready."));
         return ok(index.render(
                 Game.find.all(),
                 Player.find.all()

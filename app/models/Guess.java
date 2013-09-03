@@ -18,7 +18,7 @@ public class Guess extends Model {
     public Long id;
 
     @Constraints.Required
-    public String name;
+    public Integer value;
 
     @ManyToOne(cascade=CascadeType.ALL)
     public Game game;
@@ -27,7 +27,7 @@ public class Guess extends Model {
     @ManyToOne(cascade=CascadeType.ALL)
     public Player player;
 
-    public boolean done;
+
 
     @Formats.DateTime(pattern="dd/MM/yyyy")
     public Date dueDate = new Date();
